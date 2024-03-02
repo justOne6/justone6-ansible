@@ -1,0 +1,4 @@
+---
+- hosts: all
+  roles:
+    # specify needed roles to run '- docker' for example

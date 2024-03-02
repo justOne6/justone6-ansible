@@ -1,0 +1,18 @@
+---
+- name: Check Nginx status
+  command: nginx -v
+  register: nginx_installed
+  ignore_errors: yes
+
+- name: Display the result
+  debug:
+    msg: "Nginx is already installed."
+  when: nginx_installed.rc == 0
+
+- name: Install NGINX
+  become: yes
+  apt:
+    name: nginx
+    state: present
+  when: nginx_installed.rc != 0
+  notify: Restart Nginx

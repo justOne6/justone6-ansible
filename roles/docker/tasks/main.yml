@@ -1,0 +1,22 @@
+- name: Check if Docker is installed
+  command: docker --version
+  register: docker_check
+  ignore_errors: yes
+
+- name: Display the result
+  debug:
+    msg: "Docker is already installed."
+  when: docker_check.rc == 0
+
+- name: Install Docker
+  become: yes
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+  when: docker_check.rc != 0
+
+- name: Display the result
+  debug:
+    msg: "Docker has been installed."
+  when: docker_check.rc != 0
