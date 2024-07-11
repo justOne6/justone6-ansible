@@ -1,0 +1,4 @@
+pg_name: your_database_name
+pg_user: your_db_user
+pg_password: your_db_password
+backup_path: /path/to/backup/directory
